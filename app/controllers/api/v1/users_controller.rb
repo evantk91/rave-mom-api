@@ -1,21 +1,19 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
     def index
         @users = User.all
-        render json: { user: UserSerializer.new(@users) }
+        render json: @users
     end
 
     def create
-        @user = User.create(user_params)
+        @user = User.new(
+            username: params[:username],
+            password: params[:password]
+        )
 
-        if @user.valid?
-            render json: { user: UserSerializer.new(@user) }, status: :created
+        if @user.save
+            render json: @user, status: :created
         else
-            render json: {error: "password needs to be 5 characters or more"}, status: :bad_request
+            render json: { error: 'failed to create user' }, status: :bad_request
         end
-    end
-
-    private
-    def user_params
-        params.require(:user).permit(:username, :password)
     end
 end
