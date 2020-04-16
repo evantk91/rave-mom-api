@@ -5,11 +5,15 @@ class Api::V1::AuthenticationController < ApplicationController
         if !@user
             render status: :unauthorized
         else
-            secret = Rails.application.secret_key_base
-            payload = { user_id: @user.id }
-            token = JWT.encode(payload, secret)
+            if !@user.authenticate(params[:password])
+                render status: :unathorized
+            else
+                secret = Rails.application.secret_key_base
+                payload = { user_id: @user.id }
+                token = JWT.encode(payload, secret)
 
-            render json: { token: token, user_id: @user.id }
+                render json: { token: token, user_id: @user.id }
+            end    
         end
     end
 end
