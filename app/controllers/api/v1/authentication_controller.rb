@@ -11,8 +11,14 @@ class Api::V1::AuthenticationController < ApplicationController
                 secret = Rails.application.secret_key_base
                 payload = { user_id: @user.id }
                 token = JWT.encode(payload, secret)
+                @scores = Score.all.map do |score| 
+                    {
+                        score: score.score,
+                        user: @user.username
+                    }      
+                end
 
-                render json: { token: token, user_id: @user.id }
+                render json: { token: token, user_id: @user.id, scores: @scores }
             end    
         end
     end
