@@ -14,7 +14,8 @@ class Api::V1::AuthenticationController < ApplicationController
                 @scores = Score.all.map do |score| 
                     {
                         score: score.score,
-                        user: @user.username
+                        user_id: score.user_id,
+                        username: score.user.username
                     }      
                 end
 
