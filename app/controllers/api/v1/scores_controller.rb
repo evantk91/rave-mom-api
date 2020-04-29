@@ -7,11 +7,12 @@ class Api::V1::ScoresController < ApplicationController
     end
 
     def create
-        @score = Score.create(
-            user_id: params[:user_id],
-            score: params[:score]
-        )
-
+        @score = Score.create(score_params)
         render json: @score
+    end
+
+    private
+    def score_params
+        params.require(:score).permit(:score)
     end
 end
