@@ -13,6 +13,6 @@ class Api::V1::ScoresController < ApplicationController
 
     private
     def score_params
-        params.require(:score).permit(:score)
+        params.require(:score).permit(:user_id, :score)
     end
 end
