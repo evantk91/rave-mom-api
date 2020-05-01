@@ -1,16 +1,14 @@
 # Rave Mom: Phaser Game
 
-Description:
-
-Rave mom is a one player survival game. You are your squad's only hope! Feed them water to score points. Avoid the festival lasers or you will be knocked out by the intense bass music!
+Rave mom is a one player survival game written in Phaser 3 and Ruby on Rails. You are your squad's only hope! Feed them water to score points. Avoid the festival lasers or you will be knocked out by the intense bass music!
 
 How to start game:
 
-To run the game locally fork and clone "rave-mom-app" along with the corresponding backend built in "rave-mom-api".
-Run "bundle install" to install the appropriate gems.
-Run the rails server using the command "rails s" and run the front end using lite-server or equivalent.
+1. To run the game locally, fork and clone "rave-mom-api" along with the corresponding frontend "rave-mom-app" (https://github.com/evantk91/rave-mom-app)
+2. Run "bundle install" to install the appropriate gems.
+3. Run the rails server using the command "rails s" and run the front end using lite-server or equivalent.
 
-The game will be hosted on Heroku and Google Firebase soon.
+Rave Mom is hosted on Google Firebase here => https://rave-mom.firebaseapp.com/
 
 Built With:
 
@@ -18,7 +16,7 @@ Phaser 3, JavaScript, Ruby (2.6.1), Rails (6.0.2), postgresql 12, Asesprite (v1.
 
 Authors:
 
-Evan Greer
+Evan Greer (email: etgreer91@gmail.com, linkedIn: https://www.linkedin.com/in/evantkgreer/)
 
 Acknowledgments:
 
