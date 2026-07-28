@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: rave_mom_api_production
-  username: rave_mom_api
-  password: <%= ENV['RAVE_MOM_API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
