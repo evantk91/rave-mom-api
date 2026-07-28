@@ -18,6 +18,9 @@ RUN gem install bundler -v 2.1.4
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
+# mimemagic's installer wants a system MIME database we don't need --
+# this app never uses ActiveStorage's file-type detection.
+ENV USE_FREEDESKTOP_PLACEHOLDER=true
 RUN bundle install --jobs 4 --retry 3
 
 COPY . .
