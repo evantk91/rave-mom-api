@@ -25,6 +25,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+# Pin past the yanked 0.3.4 release that activestorage's marcel dependency
+# resolves to otherwise (pulled from rubygems.org over a licensing issue)
+gem 'mimemagic', '>= 0.3.10'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
