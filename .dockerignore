@@ -1,0 +1,11 @@
+.git
+.bundle
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+storage/*
+!storage/.keep
+config/master.key
+.byebug_history
+.claude
