@@ -1,6 +1,13 @@
 FROM ruby:2.6.1
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends libpq-dev \
+# ruby:2.6.1 is based on Debian stretch, which is EOL and no longer
+# served from the regular mirrors -- point apt at the archive instead.
+RUN sed -i \
+      -e 's|deb.debian.org|archive.debian.org|g' \
+      -e 's|security.debian.org|archive.debian.org|g' \
+      /etc/apt/sources.list \
+    && apt-get update -qq -o Acquire::Check-Valid-Until=false \
+    && apt-get install -y --no-install-recommends libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler -v 2.1.4
