@@ -1,16 +1,11 @@
-FROM ruby:2.6.1
+# ruby:2.6.1's only base is Debian stretch, whose libpq (9.6) is too
+# old for Neon: it lacks SCRAM auth support (needs libpq >= 10).
+# 2.6.10 is a same-line patch bump (bugfixes/security only) built on
+# bullseye, which ships libpq 13.
+FROM ruby:2.6.10-bullseye
 
-# ruby:2.6.1 is based on Debian stretch, which is EOL and no longer
-# served from the regular mirrors -- point apt at the archive instead.
-RUN sed -i \
-      -e 's|deb.debian.org|archive.debian.org|g' \
-      -e 's|security.debian.org|archive.debian.org|g' \
-      -e '/stretch-updates/d' \
-      /etc/apt/sources.list \
-    && apt-get update -qq \
-      -o Acquire::Check-Valid-Until=false \
-      -o APT::Get::AllowUnauthenticated=true \
-    && apt-get install -y --no-install-recommends --allow-unauthenticated libpq-dev \
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler -v 2.1.4
