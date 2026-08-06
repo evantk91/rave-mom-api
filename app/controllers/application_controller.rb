@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     def authenticate
-        token = request.headers['Authorization'].split(' ')[1]
+        token = request.headers['Authorization']&.split(' ')&.[](1)
 
         if !token
             render json: { message: "no token, braddah" }, status: :unauthorized

@@ -7,12 +7,16 @@ class Api::V1::ScoresController < ApplicationController
     end
 
     def create
-        @score = Score.create(score_params)
-        render json: @score
+        @score = @user.scores.create(score_params)
+        if @score.persisted?
+            render json: @score
+        else
+            render json: @score.errors, status: :unprocessable_entity
+        end
     end
 
     private
     def score_params
-        params.require(:score).permit(:user_id, :score)
+        params.require(:score).permit(:score)
     end
 end
